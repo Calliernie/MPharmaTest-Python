@@ -1,6 +1,6 @@
 import time
 
-import unittest
+from locators.patient_creation_page_locators import PatientCreationPageLocators
 from behave import given, when, then
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -29,48 +29,48 @@ def navigate_to_url(context):
 
 @when("I type the patient's first name")
 def type_patient_first_name(context):
-    context.driver.find_element(By.XPATH, "//input[@data-test-id='first-name']").send_keys(first_name)
+    context.driver.find_element(By.XPATH, PatientCreationPageLocators.first_name_xpath).send_keys(first_name)
 
 
 @then("I type the patient's middle name")
 def type_patient_middle_name(context):
-    context.driver.find_element(By.XPATH, "//input[@data-test-id='middle-name']").send_keys(middle_name)
+    context.driver.find_element(By.XPATH, PatientCreationPageLocators.middle_name_xpath).send_keys(middle_name)
 
 
 @then("I type the patient's last name")
 def type_patient_last_name(context):
-    context.driver.find_element(By.XPATH, "//input[@data-test-id='last-name']").send_keys(last_name)
+    context.driver.find_element(By.XPATH, PatientCreationPageLocators.last_name_xpath).send_keys(last_name)
 
 
 @then("I type the patient's phone number")
 def type_patient_phone_number(context):
-    context.driver.find_element(By.XPATH, "//input[@data-test-id='phone-number']").send_keys(phone_number)
+    context.driver.find_element(By.XPATH, PatientCreationPageLocators.phone_number_xpath).send_keys(phone_number)
 
 
 @then("I type the patient's date of birth")
 def type_patient_date_of_birth(context):
-    context.driver.find_element(By.XPATH, "//input[@data-test-id='dob']").send_keys(date_of_birth)
+    context.driver.find_element(By.XPATH, PatientCreationPageLocators.date_of_birth_xpath).send_keys(date_of_birth)
 
 
 @then("I type the patient's address")
 def type_patient_address(context):
-    context.driver.find_element(By.XPATH, "//textarea[@data-test-id='address']").send_keys(address)
+    context.driver.find_element(By.XPATH, PatientCreationPageLocators.address_xpath).send_keys(address)
 
 
 @when("I click on the add new user button")
 def click_add_new_user_button(context):
-    context.driver.find_element(By.XPATH, "//a[@data-test-id='submit-btn']").click()
+    context.driver.find_element(By.XPATH, PatientCreationPageLocators.add_new_user_button_xpath).click()
 
 
 @then("I should see the added patient's full name")
 def check_patient_full_name(context):
-    text_to_check = context.driver.find_element(By.XPATH, "//*[@id=\"root\"]/div/div[2]/main/div[1]/div[2]/h4").text
+    text_to_check = context.driver.find_element(By.XPATH, PatientCreationPageLocators.created_user_full_name_xpath).text
     assert full_name == text_to_check
 
 
 @then("I should see the added patient's address")
 def check_patient_address(context):
-    text_to_check = context.driver.find_element(By.XPATH, "//*[@id=\"root\"]/div/div[2]/main/div[1]/div[2]/p[1]").text
+    text_to_check = context.driver.find_element(By.XPATH, PatientCreationPageLocators.created_user_address).text
     assert address in text_to_check
 
 
@@ -78,7 +78,7 @@ def check_patient_address(context):
 def check_patient_date_of_birth(context):
     final_date = format_day(day) + " " + get_month(month) + " " + year
     print(final_date)
-    text_to_check = context.driver.find_element(By.XPATH, "//*[@id=\"root\"]/div/div[2]/main/div[1]/div[2]/p[2]").text
+    text_to_check = context.driver.find_element(By.XPATH, PatientCreationPageLocators.created_user_date_of_birth).text
     assert final_date in text_to_check
     time.sleep(5)
 
