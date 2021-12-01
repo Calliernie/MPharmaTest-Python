@@ -16,7 +16,7 @@ After cloning, do the following:
 
 - cd MPharmaTest-Python-main
 - open a terminal and create a virtual environment for the project https://docs.python.org/3/library/venv.html
-- activate the virtual environment
+- activate the virtual environment - (venv\Scripts\activate)
 - pip install selenium
 - pip install behave
 - pip install webdriver-manager
