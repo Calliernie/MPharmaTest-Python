@@ -1,10 +1,11 @@
 import time
 
 from locators.patient_creation_page_locators import PatientCreationPageLocators
+from helpers.date_destructurer import DateDestructurer
+from helpers.month_destructurer import MonthDestructurer
+from config.set_up import Setup
 from behave import given, when, then
-from selenium import webdriver
 from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager
 
 first_name = "Ernest"
 middle_name = "Kwame"
@@ -22,7 +23,7 @@ year = date_of_birth[4:8]
 
 @given('I open the a browser and navigate to the URL')
 def navigate_to_url(context):
-    context.driver = webdriver.Chrome(ChromeDriverManager().install())
+    context.driver = Setup.get_driver()
     context.driver.get("http://localhost:3000/")
     context.driver.maximize_window()
 
@@ -76,50 +77,8 @@ def check_patient_address(context):
 
 @then("I should see the added patient's date of birth")
 def check_patient_date_of_birth(context):
-    final_date = format_day(day) + " " + get_month(month) + " " + year
+    final_date = DateDestructurer.format_day(day) + " " + MonthDestructurer.get_month(month) + " " + year
     print(final_date)
     text_to_check = context.driver.find_element(By.XPATH, PatientCreationPageLocators.created_user_date_of_birth).text
     assert final_date in text_to_check
     time.sleep(5)
-
-
-def format_day(dayton):
-    if 10 <= int(dayton) <= 20:
-        return dayton + "th"
-    elif int(dayton) % 10 == 1:
-        return dayton + "st"
-    elif int(dayton) % 10 == 2:
-        return dayton + "nd"
-    elif int(dayton) % 10 == 3:
-        return dayton + "rd"
-    else:
-        return dayton + "th"
-
-
-def get_month(monthon):
-    if int(monthon) == 1:
-        return "January"
-    elif int(monthon) == 2:
-        return "February"
-    elif int(monthon) == 3:
-        return "March"
-    elif int(monthon) == 4:
-        return "April"
-    elif int(monthon) == 5:
-        return "May"
-    elif int(monthon) == 6:
-        return "June"
-    elif int(monthon) == 7:
-        return "July"
-    elif int(monthon) == 8:
-        return "August"
-    elif int(monthon) == 9:
-        return "September"
-    elif int(monthon) == 10:
-        return "October"
-    elif int(monthon) == 11:
-        return "November"
-    elif int(monthon) == 12:
-        return "December"
-    else:
-        return monthon + " wrong month"
