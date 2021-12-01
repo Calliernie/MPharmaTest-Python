@@ -15,9 +15,9 @@ Clone the repository onto your local machine using git clone https://github.com/
 After cloning, do the following:
 
 - cd MPharmaTest-Python-main
-- create a virtual environment for the project https://docs.python.org/3/library/venv.html
+- open a terminal and create a virtual environment for the project https://docs.python.org/3/library/venv.html
 - activate the virtual environment
 - pip install selenium
 - pip install behave
 - pip install webdriver-manager
-- open a terminal and run "behave"
+- run "behave"
