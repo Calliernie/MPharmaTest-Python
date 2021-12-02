@@ -1,5 +1,5 @@
 ## MPharmaTest - Python
-Automated test scripts written in python with selenium and behave\
+Automated test scripts written in python with selenium, gherkin and behave\
 Java version is available here https://github.com/Calliernie/MPharmaTest
 
 ## Prerequisites
